@@ -4,6 +4,7 @@ defmodule Chatter.User do
 
   schema "users" do
     field :email, :string
+    field :password, :string, virtual: true
     field :hashed_password, :string
     field :session_secret, :string
 
