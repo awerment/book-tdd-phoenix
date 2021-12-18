@@ -4,4 +4,7 @@ defmodule Chatter.Chat do
   def all_rooms() do
     Chat.Room |> Repo.all()
   end
+
+  def new_chat_room() do
+  end
 end
