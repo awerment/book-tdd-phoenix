@@ -1,5 +1,5 @@
 <div>
-    <%= form_for @changeset, Routes.chat_room_path(@conn, :new), fn f -> %>
+    <%= form_for @changeset, Routes.chat_room_path(@conn, :create), fn f -> %>
         <label>
             Name
             <%= error_tag f, :name %>

@@ -5,7 +5,7 @@ defmodule ChatterWeb.UserCreatesNewChatRoomTest do
     session
     |> visit(Routes.chat_room_path(@endpoint, :index))
     |> click(Query.link("New chat room"))
-    |> fill_in(Query.text_field("name"), with: "elixir")
+    |> fill_in(Query.text_field("Name"), with: "elixir")
     |> click(Query.button("Submit"))
     |> assert_has(Query.data("role", "room-title", text: "elixir"))
   end
