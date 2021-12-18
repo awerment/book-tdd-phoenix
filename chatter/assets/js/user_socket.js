@@ -62,6 +62,14 @@ if (chatRoomTitle) {
     channel.join()
         .receive("ok", resp => { console.log("Joined successfully", resp) })
         .receive("error", resp => { console.log("Unable to join", resp) })
+
+    let form = document.getElementById("new-message-form");
+    let messageInput = document.getElementById("message");
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+        channel.push("new_message", { body: messageInput.value });
+        event.target.reset();
+    })
 }
 
 export default socket
