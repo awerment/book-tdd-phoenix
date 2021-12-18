@@ -6,6 +6,6 @@ defmodule ChatterWeb.UserVisitsRoomsPageTest do
 
     session
     |> visit(Routes.chat_room_path(@endpoint, :index))
-    |> assert_has(Query.css(".room", text: room.name))
+    |> assert_has(Query.data("role", "room", text: room.name))
   end
 end
