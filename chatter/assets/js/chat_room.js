@@ -4,11 +4,11 @@ let chatRoomTitle = document.getElementById("chat-room-title");
 if (chatRoomTitle) {
     let chatRoomName = chatRoomTitle.dataset.chatRoomName;
     let channel = socket.channel(`chat_room:${chatRoomName}`, {})
-    let form = document.getElementById("new-message-form");
+    let messageForm = document.getElementById("new-message-form");
     let messageInput = document.getElementById("message");
-    let messages = document.querySelector("[data-role='messages']");
+    let messagesContainer = document.querySelector("[data-role='messages']");
 
-    form.addEventListener("submit", event => {
+    messageForm.addEventListener("submit", event => {
         event.preventDefault();
         channel.push("new_message", { body: messageInput.value });
         event.target.reset();
@@ -18,7 +18,7 @@ if (chatRoomTitle) {
         let messageItem = document.createElement("li");
         messageItem.dataset.role = "message";
         messageItem.innerText = payload.body;
-        messages.appendChild(messageItem);
+        messagesContainer.appendChild(messageItem);
     })
 
     channel.join();
