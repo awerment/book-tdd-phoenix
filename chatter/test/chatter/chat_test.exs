@@ -28,5 +28,14 @@ defmodule Chatter.ChatTest do
       assert %Chat.Room{} = room
       assert params["name"] == room.name
     end
+
+    test "returns an error tuple if params are invalid" do
+      insert(:chat_room, name: "elixir")
+      params = string_params_for(:chat_room, name: "elixir")
+
+      {:error, changeset} = Chat.create_chat_room(params)
+      refute changeset.valid?
+      assert "has already been taken" in errors_on(changeset).name
+    end
   end
 end
