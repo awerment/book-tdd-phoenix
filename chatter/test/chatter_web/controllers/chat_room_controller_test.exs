@@ -3,11 +3,13 @@ defmodule ChatterWeb.ChatRoomControllerTest do
 
   describe "create/2" do
     test "renders new page with errors when data is invalid", %{conn: conn} do
+      user = insert(:user)
       insert(:chat_room, name: "elixir")
       params = string_params_for(:chat_room, name: "elixir")
 
       response =
         conn
+        |> log_in_user(user)
         |> post(Routes.chat_room_path(conn, :create), %{"room" => params})
         |> html_response(200)
 

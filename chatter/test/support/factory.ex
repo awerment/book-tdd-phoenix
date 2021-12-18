@@ -10,7 +10,8 @@ defmodule Chatter.Factory do
   def user_factory() do
     %Chatter.User{
       email: sequence(:email, &"super#{&1}@example.com"),
-      password: "password1"
+      password: "strongpassword1",
+      hashed_password: Bcrypt.hash_pwd_salt("strongpassword1")
     }
   end
 end

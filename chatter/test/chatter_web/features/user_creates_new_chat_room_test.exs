@@ -12,13 +12,6 @@ defmodule ChatterWeb.UserCreatesNewChatRoomTest do
     |> assert_has(room_title("elixir"))
   end
 
-  defp sign_in(session, as: user) do
-    session
-    |> fill_in(Query.text_field("Email"), with: user.email)
-    |> fill_in(Query.text_field("Password"), with: user.password)
-    |> click(Query.button("Sign in"))
-  end
-
   defp new_chat_link(), do: Query.link("New chat room")
 
   defp create_chat_room(session, name: name) do

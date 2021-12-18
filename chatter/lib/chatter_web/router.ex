@@ -1,7 +1,7 @@
 defmodule ChatterWeb.Router do
   use ChatterWeb, :router
 
-  alias ChatterWeb.Plugs
+  import ChatterWeb.UserAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,6 +10,7 @@ defmodule ChatterWeb.Router do
     plug :put_root_layout, {ChatterWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :api do
@@ -17,7 +18,15 @@ defmodule ChatterWeb.Router do
   end
 
   scope "/", ChatterWeb do
-    pipe_through [:browser, Plugs.RequireLogin]
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    get "/sign_in", SessionController, :new
+    resources "/sessions", SessionController, only: [:create]
+    resources "/users", UserController, only: [:new, :create]
+  end
+
+  scope "/", ChatterWeb do
+    pipe_through [:browser, :require_authenticated_user]
 
     resources "/chat_rooms", ChatRoomController, only: [:new, :create, :show]
     get "/", ChatRoomController, :index
@@ -55,5 +64,11 @@ defmodule ChatterWeb.Router do
 
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  scope "/", ChatterWeb do
+    pipe_through [:browser]
+
+    delete "/users/log_out", SessionController, :delete
   end
 end
