@@ -1,0 +1,10 @@
+<div>
+    <%= form_for @changeset, Routes.chat_room_path(@conn, :new), fn f -> %>
+        <label>
+            Name
+            <%= error_tag f, :name %>
+            <%= text_input f, :name %>
+        </label>
+        <%= submit "Submit" %>
+    <% end %>
+</div>
