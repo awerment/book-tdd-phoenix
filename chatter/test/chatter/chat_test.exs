@@ -19,4 +19,14 @@ defmodule Chatter.ChatTest do
       assert %Ecto.Changeset{} = Chat.new_chat_room()
     end
   end
+
+  describe "create_chat_room/1" do
+    test "creates a room with valid params" do
+      params = string_params_for(:chat_room)
+      {:ok, room} = Chat.create_chat_room(params)
+
+      assert %Chat.Room{} = room
+      assert params["name"] == room.name
+    end
+  end
 end
