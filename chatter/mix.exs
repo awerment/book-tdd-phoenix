@@ -50,7 +50,8 @@ defmodule Chatter.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       # testing
-      {:wallaby, "~> 0.29.1", runtime: false, only: :test}
+      {:wallaby, "~> 0.29.1", runtime: false, only: :test},
+      {:ex_machina, "~> 2.7.0", only: :test}
     ]
   end
 
