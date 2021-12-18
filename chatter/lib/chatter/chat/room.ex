@@ -1,5 +1,6 @@
 defmodule Chatter.Chat.Room do
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "chat_rooms" do
     field :name, :string
@@ -8,5 +9,7 @@ defmodule Chatter.Chat.Room do
   end
 
   def changeset(room, attrs) do
+    room
+    |> cast(attrs, [:name])
   end
 end
