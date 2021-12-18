@@ -7,10 +7,7 @@ defmodule ChatterWeb.UserSocket do
   # assign values that can be accessed by your channel topics.
 
   ## Channels
-  # Uncomment the following line to define a "room:*" topic
-  # pointing to the `ChatterWeb.RoomChannel`:
-  #
-  # channel "room:*", ChatterWeb.RoomChannel
+  channel "chat_room:*", ChatterWeb.ChatRoomChannel
   #
   # To create a channel file, use the mix task:
   #
@@ -18,7 +15,6 @@ defmodule ChatterWeb.UserSocket do
   #
   # See the [`Channels guide`](https://hexdocs.pm/phoenix/channels.html)
   # for futher details.
-
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
