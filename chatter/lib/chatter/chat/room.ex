@@ -6,4 +6,7 @@ defmodule Chatter.Chat.Room do
 
     timestamps()
   end
+
+  def changeset(room, attrs) do
+  end
 end
