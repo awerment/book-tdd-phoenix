@@ -18,7 +18,7 @@ config :chatter, Chatter.Repo,
 config :chatter, ChatterWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "Qg2eq/0At1Wrgk/s81NIKqWjKn+C63gliKQDcnyt6vjsz0GMc/PE77y5MyD5SHR0",
-  server: false
+  server: true
 
 # In test we don't send emails.
 config :chatter, Chatter.Mailer, adapter: Swoosh.Adapters.Test
@@ -28,3 +28,8 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :chatter, :sql_sandbox, true
+
+config :wallaby, :chromedriver, path: "chromedriver"
+config :wallaby, driver: Wallaby.Chrome
