@@ -9,4 +9,7 @@ defmodule Chatter.Chat do
     %Chat.Room{}
     |> Chat.Room.changeset(%{})
   end
+
+  def create_chat_room(params) do
+  end
 end
