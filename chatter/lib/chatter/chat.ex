@@ -26,7 +26,7 @@ defmodule Chatter.Chat do
 
   def new_message(room, params) do
     room
-    |> Ecto.build_assoc(:mesages)
+    |> Ecto.build_assoc(:messages)
     |> Chat.Room.Message.changeset(params)
     |> Repo.insert()
   end
