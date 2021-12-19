@@ -3,8 +3,9 @@ defmodule ChatterWeb.ChatRoomChannel do
 
   alias Chatter.Chat
 
-  def join("chat_room:" <> _room_name, _msg, socket) do
-    {:ok, socket}
+  def join("chat_room:" <> room_name, _msg, socket) do
+    room = Chat.find_room_by_name(room_name)
+    {:ok, assign(socket, :room, room)}
   end
 
   def handle_in("new_message", payload, socket) do
