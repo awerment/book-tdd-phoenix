@@ -1,19 +1,12 @@
 # Chatter
 
-To start your Phoenix server:
+To be able to run the tests with `mix test`, you first need to configure the chrome driver for wallaby.
+See `config/test.exs` file, in particular:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+```elixir
+config :wallaby, :chromedriver, path: "chromedriver"
+```
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Set the path option to where chromedriver can be found on your system and you're good to go. 
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+One note though: there's an issue with wallaby not being able to connect to chromedriver when too many tests are run concurrently, so you'll probably need to run the tests with `mix test --max-cases=1` or `mix test --trace`. This sadly disables concurrent test execution, but fixes the above issue.
