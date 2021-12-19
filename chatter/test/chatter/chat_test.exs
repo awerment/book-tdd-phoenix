@@ -47,4 +47,12 @@ defmodule Chatter.ChatTest do
       assert room == found_room
     end
   end
+
+  describe "find_room_by_name/1" do
+    test "retrieves a room by name" do
+      room = insert(:chat_room)
+      found_room = Chat.find_room_by_name(room.name)
+      assert room == found_room
+    end
+  end
 end
