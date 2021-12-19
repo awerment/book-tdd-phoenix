@@ -21,6 +21,15 @@ if (chatRoomTitle) {
         messagesContainer.appendChild(messageItem);
     })
 
-    channel.join();
+    channel.join()
+        .receive("ok", resp => {
+            let messages = resp.messages;
+            messages.map(({ author, body }) => {
+                let messageItem = document.createElement("li");
+                messageItem.dataset.role = "message";
+                messageItem.innerText = `${author}: ${body}`;
+                messagesContainer.appendChild(messageItem);
+            });
+        });
 
 }
