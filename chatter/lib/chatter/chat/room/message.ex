@@ -10,10 +10,11 @@ defmodule Chatter.Chat.Room.Message do
     timestamps()
   end
 
+  @valid_fields [:author, :body, :chat_room_id]
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:author, :body, :chat_room_id])
-    |> validate_required([:author, :body, :chat_room_id])
+    |> cast(attrs, @valid_fields)
+    |> validate_required(@valid_fields)
   end
 end
