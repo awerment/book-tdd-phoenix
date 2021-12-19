@@ -4,7 +4,7 @@ defmodule Chatter.Chat.Room do
 
   schema "chat_rooms" do
     field :name, :string
-
+    has_many :messages, Chatter.Chat.Room.Message
     timestamps()
   end
 
