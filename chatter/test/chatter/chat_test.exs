@@ -87,7 +87,15 @@ defmodule Chatter.ChatTest do
 
       found_messages = Chat.room_messages(room)
 
-      assert found_messages == messages
+      assert values_match(found_messages, messages, key: :id)
+      assert values_match(found_messages, messages, key: :body)
+      assert values_match(found_messages, messages, key: :author)
     end
+
+    defp values_match(found_messages, messages, key: key) do
+      map_values(found_messages, key) == map_values(messages, key)
+    end
+
+    defp map_values(structs, key), do: Enum.map(structs, &Map.get(&1, key))
   end
 end
