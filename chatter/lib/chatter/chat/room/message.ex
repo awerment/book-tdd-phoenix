@@ -13,7 +13,7 @@ defmodule Chatter.Chat.Room.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:author, :body])
+    |> validate_required([:author, :body])
   end
 end
