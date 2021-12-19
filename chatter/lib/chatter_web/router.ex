@@ -11,15 +11,7 @@ defmodule ChatterWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
-    plug :put_user_email
-  end
-
-  defp put_user_email(conn, _opts) do
-    if current_user = conn.assigns[:current_user] do
-      assign(conn, :email, current_user.email)
-    else
-      conn
-    end
+    plug ChatterWeb.Plugs.PutUserEmail
   end
 
   pipeline :api do
