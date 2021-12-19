@@ -78,4 +78,16 @@ defmodule Chatter.ChatTest do
       assert errors_on(changeset).body
     end
   end
+
+  describe "room_messages/1" do
+    test "returns all messages associated to given room" do
+      room = insert(:chat_room)
+      messages = insert_pair(:chat_room_message, chat_room: room)
+      _different_room_message = insert(:chat_room_message)
+
+      found_messages = Chat.room_messages(room)
+
+      assert found_messages == messages
+    end
+  end
 end
