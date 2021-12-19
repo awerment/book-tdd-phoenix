@@ -28,8 +28,11 @@ defmodule ChatterWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(%{"email" => email}, socket, _connect_info) do
-    {:ok, assign(socket, :email, email)}
+  def connect(params, socket, _connect_info) do
+    case params["email"] do
+      nil -> :error
+      email -> {:ok, assign(socket, :email, email)}
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
