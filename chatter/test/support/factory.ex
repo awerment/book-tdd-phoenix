@@ -14,4 +14,12 @@ defmodule Chatter.Factory do
       hashed_password: Bcrypt.hash_pwd_salt("strongpassword1")
     }
   end
+
+  def chat_room_message_factory() do
+    %Chatter.Chat.Room.Message{
+      body: sequence(:body, &"hello there #{&1}"),
+      author: sequence(:email, &"user#{&1}@example.com"),
+      chat_room: build(:chat_room)
+    }
+  end
 end
