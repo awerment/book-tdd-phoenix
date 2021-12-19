@@ -19,4 +19,8 @@ defmodule Chatter.Chat do
   def find_room(id) do
     Chat.Room |> Repo.get!(id)
   end
+
+  def find_room_by_name(name) do
+    Chat.Room |> Repo.get_by!(name: name)
+  end
 end
