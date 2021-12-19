@@ -14,21 +14,22 @@ if (chatRoomTitle) {
         event.target.reset();
     })
 
-    channel.on("new_message", payload => {
+    const addMessage = (author, body) => {
         let messageItem = document.createElement("li");
         messageItem.dataset.role = "message";
-        messageItem.innerText = `${payload.author}: ${payload.body}`;
+        messageItem.innerText = `${author}: ${body}`;
         messagesContainer.appendChild(messageItem);
+    };
+
+    channel.on("new_message", payload => {
+        addMessage(payload.author, payload.body)
     })
 
     channel.join()
         .receive("ok", resp => {
             let messages = resp.messages;
             messages.map(({ author, body }) => {
-                let messageItem = document.createElement("li");
-                messageItem.dataset.role = "message";
-                messageItem.innerText = `${author}: ${body}`;
-                messagesContainer.appendChild(messageItem);
+                addMessage(author, body);
             });
         });
 
