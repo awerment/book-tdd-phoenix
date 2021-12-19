@@ -2,7 +2,6 @@ defmodule Chatter.Accounts.UserToken do
   use Ecto.Schema
   import Ecto.Query
 
-  @hash_algorithm :sha256
   @rand_size 32
 
   @session_validity_in_days 60
@@ -55,18 +54,6 @@ defmodule Chatter.Accounts.UserToken do
         select: user
 
     {:ok, query}
-  end
-
-  defp build_hashed_token(user, context) do
-    token = :crypto.strong_rand_bytes(@rand_size)
-    hashed_token = :crypto.hash(@hash_algorithm, token)
-
-    {Base.url_encode64(token, padding: false),
-     %Chatter.Accounts.UserToken{
-       token: hashed_token,
-       context: context,
-       user_id: user.id
-     }}
   end
 
   @doc """
